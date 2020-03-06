@@ -1,8 +1,11 @@
 package com.lin.learn;
 
+import com.lin.learn.java.p1.BitOperation;
+import com.lin.learn.java.p1.Sort;
+
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -16,7 +19,12 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void test_T(){
-        T.print();
+    public void bitOperationTest() {
+        BitOperation.test();
+    }
+
+    @Test
+    public void sortTest(){
+        Sort.test();
     }
 }
