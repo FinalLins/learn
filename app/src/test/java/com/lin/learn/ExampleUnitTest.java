@@ -1,6 +1,7 @@
 package com.lin.learn;
 
 import com.lin.learn.java.p1.BitOperation;
+import com.lin.learn.java.p1.MyArray;
 import com.lin.learn.java.p1.Sort;
 
 import org.junit.Test;
@@ -24,7 +25,12 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void sortTest(){
+    public void sortTest() {
         Sort.test();
+    }
+
+    @Test
+    public void arrayTest() {
+        MyArray.test();
     }
 }
