@@ -1,8 +1,55 @@
 package com.lin.learn;
 
+import com.lin.learn.java.p1.BitOperation;
+import com.lin.learn.java.p1.My2LinkedList;
+import com.lin.learn.java.p1.MyArray;
+import com.lin.learn.java.p1.MyHeap;
+import com.lin.learn.java.p1.MyLinkedList;
+import com.lin.learn.java.p1.Sort;
+
+import org.junit.Test;
+
 public class T {
-    public static void print(){
-        System.out.println("ttt");
+    /**
+     * 位运算
+     */
+    @Test
+    public void bitOperationTest() {
+        BitOperation.test();
+    }
+
+    /**
+     * 简单排序算法
+     */
+    @Test
+    public void sortTest() {
+        Sort.test();
+    }
+
+    /**
+     * 自定义顺序存储结构
+     */
+    @Test
+    public void arrayTest() {
+        MyArray.test();
+    }
+
+    /**
+     * 自定义堆结构
+     */
+    @Test
+    public void heapTest() {
+        MyHeap.test();
+    }
+
+    @Test
+    public void singleLinkedListTest(){
+        MyLinkedList.test();
+    }
+
+    @Test
+    public void linkedListTest(){
+        My2LinkedList.test();
     }
 }
 
