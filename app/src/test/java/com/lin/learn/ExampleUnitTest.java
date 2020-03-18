@@ -18,19 +18,4 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
-
-    @Test
-    public void bitOperationTest() {
-        BitOperation.test();
-    }
-
-    @Test
-    public void sortTest() {
-        Sort.test();
-    }
-
-    @Test
-    public void arrayTest() {
-        MyArray.test();
-    }
 }

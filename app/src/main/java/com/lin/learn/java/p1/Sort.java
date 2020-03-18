@@ -20,6 +20,7 @@ public class Sort {
 
     /**
      * 冒泡排序
+     * 排序逻辑，每次对相邻数据进行比较，一次循环下来，会把最大或者最小的数据排到最后
      */
     public static void bubbleSort(int[] array) {
         int len = array.length;
@@ -85,7 +86,7 @@ public class Sort {
                 array[l++] = array[r];
             }
 
-            while (l < r && array[l] < p) { //从左边开始比，如果大于等于就把指针往右边移动
+            while (l < r && array[l] <= p) { //从左边开始比，如果大于等于就把指针往右边移动
                 l++;
             }
 
@@ -128,6 +129,7 @@ public class Sort {
                 r++;
             }
         }
+        //end----两次递归，根据顺序的意思就是LRD，二叉树的后序遍历
     }
 
     public static void insertSort(int[] array) {
