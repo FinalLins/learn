@@ -7,7 +7,7 @@ import com.lin.learn.java.structure.MyLinkedList;
  */
 public class Practice {
 
-    private static void mahjongRadix() {
+    private static void mahjong() {
         //模拟接收到服务端数据
         //七万、九万、九饼、六饼、九条、一饼、四万、二万、一万、三万、九饼、五饼、六条、八条和九饼
         MyLinkedList<Mahjong> mahjongs = new MyLinkedList<>(20);
@@ -26,9 +26,12 @@ public class Practice {
         mahjongs.add(new Mahjong(Mahjong.Color.TIAO, 6));
         mahjongs.add(new Mahjong(Mahjong.Color.TIAO, 8));
         mahjongs.add(new Mahjong(Mahjong.Color.BING, 9));
+        System.out.println(mahjongs.size());
         mahjongs.reverse();
+        mahjongs.display();                                         //接收到牌
+        radixSort(mahjongs);                                        //链式基数排序
         mahjongs.display();
-        radixSort(mahjongs);
+        mahjongAdd(mahjongs, new Mahjong(Mahjong.Color.TIAO, 3));
     }
 
     private static void radixSort(MyLinkedList<Mahjong> list) {
@@ -65,13 +68,23 @@ public class Practice {
                 list.add(mahjong);
             }
         }
+    }
 
-        list.display();
+    private static void mahjongAdd(MyLinkedList<Mahjong> list, Mahjong mahjong) {
+//        int size = list.size();
+//        MyLinkedList.Node<Mahjong> cur = list.getHead();
+//        while (cur != null) {
+//            if (cur.data.color != mahjong.color) {
+//                cur = cur.next;
+//                continue;
+//            }
+//            if (cur.data.)
+//        }
+
     }
 
     public static void test() {
-        mahjongRadix();     //收到第一副牌的排序
-        //mahjongShell();     //出牌阶段，使用希尔排序
+        mahjong();
     }
 
 

@@ -1,4 +1,4 @@
-package com.lin.learn.java.algorithm.c2;
+package com.lin.learn.java.algorithm.c1;
 
 import java.util.Arrays;
 

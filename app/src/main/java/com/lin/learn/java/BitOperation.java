@@ -1,4 +1,4 @@
-package com.lin.learn.java.p1;
+package com.lin.learn.java;
 
 /**
  * 基础知识-位运算

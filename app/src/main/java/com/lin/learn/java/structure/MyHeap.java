@@ -1,4 +1,4 @@
-package com.lin.learn.java.p1;
+package com.lin.learn.java.structure;
 
 import java.util.Arrays;
 
@@ -34,10 +34,12 @@ public class MyHeap {
     private void adjustUp(int i) {
         int index = i;
         int parent = (index - 1) / 2;
-        while (index > 0
-                && array[parent] < array[index]) { //构造的是最大堆
-            swap(parent, index); //交换数据
-            index = parent;
+        while (
+                index > 0
+                        && parent >= 0
+                        && array[parent] < array[index]) { //构造的是最大堆
+            swap(parent, index);        //交换数据
+            index = parent;             //向上递推
             parent = (index - 1) / 2;
         }
     }
@@ -47,15 +49,17 @@ public class MyHeap {
      */
     public void remove() {
         if (size == 0) {
-            return;//堆里已经没有元素了
+            return;                     //堆里已经没有元素了
         }
-        array[0] = array[size - 1];
+        array[0] = array[size - 1];     //删除堆顶元素并且把最后的元素放到堆顶来
         array[size - 1] = 0;
         size--;
-        adjustDown(0);
+        adjustDown(0);               //删除和调整堆顶元素后，堆结构被破坏，重新调整
     }
 
     /**
+     * 递归的方式向下调整堆结构
+     *
      * @param i
      */
     private void adjustDown(int i) {
@@ -79,12 +83,17 @@ public class MyHeap {
         adjustDown(index);
     }
 
+    /**
+     * 递推方式向下调整堆结构
+     *
+     * @param i
+     */
     private void adjustDown2(int i) {
         int index = i;
         int leftChild, rightChild, max;
         while (index < size) {
             leftChild = 2 * index + 1;
-            rightChild = leftChild + index;
+            rightChild = leftChild + 1;
             max = index;
             if (leftChild < size && array[max] < array[leftChild]) {
                 max = leftChild;

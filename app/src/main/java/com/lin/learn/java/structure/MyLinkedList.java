@@ -1,4 +1,4 @@
-package com.lin.learn.java.p1;
+package com.lin.learn.java.structure;
 
 import java.util.Objects;
 
@@ -16,8 +16,13 @@ public class MyLinkedList<E> {
 
     private int capacity;
 
+
     public MyLinkedList(int capacity) {
         this.capacity = capacity;
+    }
+
+    public int size () {
+        return size;
     }
 
     public void add(E element) {
@@ -29,6 +34,7 @@ public class MyLinkedList<E> {
         //1.head == null 说明链表为空
         if (head == null) {
             head = node;
+            size++;
             return;
         }
 
@@ -38,6 +44,16 @@ public class MyLinkedList<E> {
         size++;
     }
 
+    public E poll() {
+        if (size == 0) {
+            return null;
+        }
+        E e = head.data;
+        head = head.next;
+        size--;
+        return e;
+    }
+
     public boolean remove(E element) {
         if (size == 0) {
             return false;
@@ -45,8 +61,11 @@ public class MyLinkedList<E> {
         Node<E> parent = head;
         Node<E> node = head;
         while (node != null) {
-            if (Objects.equals(element, node.data)) {
-                parent.next = node.next;
+            if (Objects.equals(element, node.data)) {   //找到该节点
+                parent.next = node.next;                //把上一个节点和下一个节点连接起来
+
+                node.data = null;
+                node.next = null;                       //断开该节点引用关系
                 size--;
                 return true;
             }
@@ -57,31 +76,50 @@ public class MyLinkedList<E> {
         return false;
     }
 
+    public Node<E> getHead() {
+        return head;
+    }
+
+    /**
+     * 递推的方式翻转链表
+     */
     public void reverse() {
         if (head == null || size == 1) {
             return;
         }
 
-        Node<E> pre = null, cur = head, next = null;
+        Node<E> prev = null;        //上一个节点
+        Node<E> cur = head;         //当前节点
+        Node<E> next = null;        //下一个节点
         while (cur != null) {
-            next = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = next;
+            next = cur.next;        //记录下一个节点的引用
+            cur.next = prev;        //让当前节点的下一个节点指向上一个节点
+            prev = cur;             //指针后移
+            cur = next;             //指针后移
         }
-        head = pre;
+        head = prev;                //新的链表头
     }
 
+    /**
+     * 递归方法翻转链表
+     *
+     * @param node
+     * @param <E>
+     * @return
+     */
     public static <E> Node<E> reverse2(Node<E> node) {
-        if (node.next == null) {
+        if (node.next == null) {                    //递归结束条件
             return node;
         }
-        Node<E> newNode = reverse2(node.next);
-        node.next.next = node;
-        node.next = null;
+        Node<E> newNode = reverse2(node.next);      //递归到最后一个节点
+        node.next.next = node;                      //倒数第二个节点的下下个节点指向自己（翻转核心代码）
+        node.next = null;                           //断开原有关系
         return newNode;
     }
 
+    public void display() {
+        display(head);
+    }
 
     public static void display(Node head) {
         if (head == null) {
@@ -118,8 +156,8 @@ public class MyLinkedList<E> {
     }
 
     public static class Node<E> {
-        E data;
-        Node<E> next;
+        public E data;
+        public Node<E> next;
 
         public Node(E data, Node<E> next) {
             this.data = data;

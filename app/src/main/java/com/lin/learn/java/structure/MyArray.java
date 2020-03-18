@@ -1,4 +1,4 @@
-package com.lin.learn.java.p1;
+package com.lin.learn.java.structure;
 
 import java.util.Arrays;
 

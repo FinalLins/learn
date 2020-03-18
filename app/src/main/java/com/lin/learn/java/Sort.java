@@ -1,4 +1,4 @@
-package com.lin.learn.java.p1;
+package com.lin.learn.java;
 
 import java.util.Arrays;
 
@@ -100,6 +100,13 @@ public class Sort {
         //end----两次递归，根据顺序的意思就是DLR，二叉树的前序遍历
     }
 
+    /**
+     * 归并排序
+     *
+     * @param array
+     * @param start
+     * @param end
+     */
     public static void mergeSort(int[] array, int start, int end) {
         if (start >= end) {
             return;
@@ -156,12 +163,44 @@ public class Sort {
         }
     }
 
+    public static void insertSort2(int[] array, int gap) {
+        int len = array.length;
+        for (int i = gap; i < len; i++) {
+            int j = i;
+            int temp = array[i];
+            while (j >= 0 && array[j - gap] > temp) {
+                array[j] = array[j - gap];
+                j -= gap;
+            }
+            array[j] = temp;
+        }
+    }
+
+    /**
+     * 希尔排序
+     *
+     * @param array
+     */
     public static void shellSort(int[] array) {
         int len = array.length;
         for (int gap = len >> 1; gap >= 1; gap >>= 1) {
             insertSort(array, gap);
         }
         printArray(array);
+    }
+
+    /**
+     * 基数排序-低位优先
+     */
+    public static void radixSort_LSD() {
+
+    }
+
+    /**
+     * 基数排序-高位优先
+     */
+    public static void radixSort_MSD() {
+
     }
 
     public static void test() {

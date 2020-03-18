@@ -1,13 +1,16 @@
 package com.lin.learn;
 
-import com.lin.learn.java.p1.BitOperation;
-import com.lin.learn.java.p1.My2LinkedList;
-import com.lin.learn.java.p1.MyArray;
-import com.lin.learn.java.p1.MyHeap;
-import com.lin.learn.java.p1.MyLinkedList;
-import com.lin.learn.java.p1.Sort;
+import com.lin.learn.java.BitOperation;
+import com.lin.learn.java.structure.My2LinkedList;
+import com.lin.learn.java.structure.MyArray;
+import com.lin.learn.java.structure.MyHeap;
+import com.lin.learn.java.structure.MyLinkedList;
+import com.lin.learn.java.Sort;
 
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class T {
     /**
@@ -42,11 +45,17 @@ public class T {
         MyHeap.test();
     }
 
+    /**
+     * 单链表
+     */
     @Test
     public void singleLinkedListTest(){
         MyLinkedList.test();
     }
 
+    /**
+     * 双向链表
+     */
     @Test
     public void linkedListTest(){
         My2LinkedList.test();
