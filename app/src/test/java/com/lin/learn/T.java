@@ -6,6 +6,7 @@ import com.lin.learn.java.structure.MyArray;
 import com.lin.learn.java.structure.MyHeap;
 import com.lin.learn.java.structure.MyLinkedList;
 import com.lin.learn.java.Sort;
+import com.lin.learn.java.structure.MyStack;
 
 import org.junit.Test;
 
@@ -49,7 +50,7 @@ public class T {
      * 单链表
      */
     @Test
-    public void singleLinkedListTest(){
+    public void singleLinkedListTest() {
         MyLinkedList.test();
     }
 
@@ -57,8 +58,16 @@ public class T {
      * 双向链表
      */
     @Test
-    public void linkedListTest(){
+    public void linkedListTest() {
         My2LinkedList.test();
+    }
+
+    /**
+     * 栈
+     */
+    @Test
+    public void stackTest() {
+        MyStack.test();
     }
 }
 
