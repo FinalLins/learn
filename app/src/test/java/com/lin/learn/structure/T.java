@@ -1,4 +1,5 @@
-package com.lin.learn;
+package com.lin.learn.structure;
+
 
 import com.lin.learn.java.BitOperation;
 import com.lin.learn.java.structure.My2LinkedList;
@@ -11,13 +12,16 @@ import com.lin.learn.java.structure.MyStack;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
+
+import androidx.collection.LruCache;
 
 public class T {
     /**
      * 位运算
      */
-    @Test
     public void bitOperationTest() {
         BitOperation.test();
     }
@@ -25,7 +29,6 @@ public class T {
     /**
      * 简单排序算法
      */
-    @Test
     public void sortTest() {
         Sort.test();
     }
@@ -33,7 +36,6 @@ public class T {
     /**
      * 自定义顺序存储结构
      */
-    @Test
     public void arrayTest() {
         MyArray.test();
     }
@@ -41,7 +43,6 @@ public class T {
     /**
      * 自定义堆结构
      */
-    @Test
     public void heapTest() {
         MyHeap.test();
     }
@@ -49,7 +50,6 @@ public class T {
     /**
      * 单链表
      */
-    @Test
     public void singleLinkedListTest() {
         MyLinkedList.test();
     }
@@ -57,7 +57,6 @@ public class T {
     /**
      * 双向链表
      */
-    @Test
     public void linkedListTest() {
         My2LinkedList.test();
     }
@@ -65,7 +64,6 @@ public class T {
     /**
      * 栈
      */
-    @Test
     public void stackTest() {
         MyStack.test();
     }
