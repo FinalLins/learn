@@ -51,7 +51,7 @@ public class MyBinaryTree<E> {
         postOrderTraverse2(root);
         System.out.println();
         System.out.println("-----堆栈方式后序遍历结束-----");
-        System.out.println();
+        System.out.println("后序遍历3");
         postOrderTraverse3(root);
         System.out.println();
     }
@@ -111,7 +111,7 @@ public class MyBinaryTree<E> {
         Stack<Node<E>> stack = new Stack<>();
         stack.push(node);
 
-        while (!stack.isEmpty()) {
+        while (!stack.isEmpty()) { //根->左->右
             Node<E> cur = stack.pop();
             System.out.print("->" + cur.item);
 
@@ -188,23 +188,22 @@ public class MyBinaryTree<E> {
         }
 
         Stack<Node<E>> stack = new Stack<>();
-        Node<E> cur = node;
-        while (cur != null || !stack.isEmpty()) {
-            if (cur != null) {
-                if (cur.leftChild != null) {
-                    stack.push(cur);
-                    cur = cur.leftChild;
-                } else if (cur.rightChild != null) {
-                    stack.push(cur);
-                    cur = cur.rightChild;
-                } else {
-                    System.out.print("->" + cur.item);
-                    cur = null;
-                }
-            } else {
-                cur = stack.pop();
+        Stack<Node<E>> out = new Stack<>();
+        stack.push(node);
+        while (!stack.isEmpty()) {  //根->右->左入栈out
+            node = stack.pop();
+            out.push(node);
+
+            if (node.leftChild != null) {
+                stack.push(node.leftChild);
+            }
+
+            if (node.rightChild != null) {
+                stack.push(node.rightChild);
             }
         }
+
+        while (!out.isEmpty()) System.out.print("->" + out.pop().item);
     }
 
 
@@ -220,8 +219,8 @@ public class MyBinaryTree<E> {
         Node<Integer> node1 = new Node<>(1, node2, node3);
 
         MyBinaryTree<Integer> binaryTree = new MyBinaryTree<>(node1);
-        binaryTree.pot();
-        binaryTree.mot();
+//        binaryTree.pot();
+//        binaryTree.mot();
         binaryTree.postOT();
 
         //算法思路 ： 怎么把递归改成非递归方式？？？？？
