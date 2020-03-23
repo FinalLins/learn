@@ -2,6 +2,8 @@ package com.lin.learn.java.structure.tree;
 
 import java.util.Stack;
 
+import androidx.annotation.NonNull;
+
 /**
  * 自定义二叉树排序树（查找二叉树）
  */
@@ -20,18 +22,35 @@ public class MySearchBinaryTree<E extends Comparable<E>> {
         Node<E> node = root;
         while (node != null) {
             parent = node;
-            if (node.item.compareTo(e) < 0) {
-                node = node.rightChild;
-            } else {
+            if (e.compareTo(node.item) < 0) {
                 node = node.leftChild;
+            } else {
+                node = node.rightChild;
             }
         }
-        if (parent.item.compareTo(e) < 0) {
-            parent.rightChild = newNode;
-        } else {
+        if (e.compareTo(parent.item) < 0) {
             parent.leftChild = newNode;
+        } else {
+            parent.rightChild = newNode;
         }
         newNode.parent = parent;
+    }
+
+    public Node<E> search(E e) {
+        if (root == null) {
+            return null;
+        }
+        Node<E> node = root;
+        while (node != null) {
+            if (e.compareTo(node.item) == 0) {
+                return node;
+            } else if (e.compareTo(node.item) < 0) {
+                node = node.leftChild;
+            } else {
+                node = node.rightChild;
+            }
+        }
+        return null;
     }
 
     public void midTraverse() {
@@ -50,6 +69,7 @@ public class MySearchBinaryTree<E extends Comparable<E>> {
                 cur = cur.rightChild;
             }
         }
+        System.out.println();
     }
 
     public static void test() {
@@ -59,6 +79,10 @@ public class MySearchBinaryTree<E extends Comparable<E>> {
             tree.add(i);
         }
         tree.midTraverse();
+
+        System.out.println(tree.search(2));
+        System.out.println(tree.search(3));
+        System.out.println(tree.search(7));
     }
 
     private static class Node<E> {
@@ -75,6 +99,15 @@ public class MySearchBinaryTree<E extends Comparable<E>> {
             this.item = item;
             this.leftChild = leftChild;
             this.rightChild = rightChild;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return "item : " + item +
+                    ",parent : " + parent.item +
+                    ",leftChild : " + ((leftChild == null) ? "null" : leftChild.item) +
+                    ",rightChild : " + ((rightChild == null) ? "null" : rightChild.item);
         }
     }
 }
