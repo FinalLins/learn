@@ -52,6 +52,8 @@ public class MyBinaryTree<E> {
         System.out.println();
         System.out.println("-----堆栈方式后序遍历结束-----");
         System.out.println();
+        postOrderTraverse3(root);
+        System.out.println();
     }
 
     /**
@@ -175,8 +177,33 @@ public class MyBinaryTree<E> {
             }
         }
 
-        for (;!out.isEmpty();) {
+        for (; !out.isEmpty(); ) {
             System.out.print("->" + out.pop().item);
+        }
+    }
+
+    public void postOrderTraverse3(Node<E> node) {
+        if (node == null) {
+            return;
+        }
+
+        Stack<Node<E>> stack = new Stack<>();
+        Node<E> cur = node;
+        while (cur != null || !stack.isEmpty()) {
+            if (cur != null) {
+                if (cur.leftChild != null) {
+                    stack.push(cur);
+                    cur = cur.leftChild;
+                } else if (cur.rightChild != null) {
+                    stack.push(cur);
+                    cur = cur.rightChild;
+                } else {
+                    System.out.print("->" + cur.item);
+                    cur = null;
+                }
+            } else {
+                cur = stack.pop();
+            }
         }
     }
 
