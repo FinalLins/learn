@@ -11,11 +11,11 @@ public class MySearchBinaryTree<E extends Comparable<E>> {
 
     private Node<E> root;
 
-    public void add(E e) {
+    public Node<E> add(E e) {
         Node<E> newNode = new Node<>(e);
         if (root == null) {
             root = newNode;
-            return;
+            return newNode;
         }
 
         Node<E> parent = null;
@@ -34,7 +34,76 @@ public class MySearchBinaryTree<E extends Comparable<E>> {
             parent.rightChild = newNode;
         }
         newNode.parent = parent;
+        return newNode;
     }
+
+    public Node<E> remove(E e) {
+
+        Node<E> node = search(e);
+        if (node == null) {
+            return null;
+        }
+
+        Node<E> parent = node.parent, leftChild = node.leftChild, rightChild = node.rightChild;
+
+        if (leftChild != null && rightChild == null) { //1.只有左子树
+            if (parent == null) { //node == root
+                root = leftChild;
+            } else if (node == parent.leftChild) {
+                parent.leftChild = leftChild;
+            } else if (node == parent.rightChild) {
+                parent.rightChild = leftChild;
+            }
+            leftChild.parent = parent;
+        } else if (leftChild == null && rightChild != null) {//2.只有右子树
+            if (parent == null) {//node == root
+                root = rightChild;
+            } else if (parent.leftChild == node) {
+                parent.leftChild = rightChild;
+            } else if (parent.rightChild == node) {
+                parent.rightChild = rightChild;
+            }
+            rightChild.parent = parent;
+        } else if (leftChild != null && rightChild != null) { //3.左右子树都有
+            //3.1找到要删除的节点的右子树的最小值代替要删除的节点
+            Node<E> minLeftChild = rightChild;
+            while (minLeftChild.leftChild != null) {
+                minLeftChild = minLeftChild.leftChild;
+            }
+
+            // 如果要删除的节点有右子树有左子树的情况，
+            // 需要把minLeftChild(要删除的节点的右子树的最小值)的右子树
+            // 赋值给需要把minLeftChild.parent.leftChild
+            if (rightChild.leftChild != null) {
+                Node<E> minParent = minLeftChild.parent;
+                minParent.leftChild = minLeftChild.rightChild;
+            }
+
+            minLeftChild.leftChild = node.leftChild;
+            if (parent == null) { //root == node
+                root = minLeftChild;
+            } else if (parent.leftChild == node) {
+                parent.leftChild = minLeftChild;
+            } else if (parent.rightChild == node) {
+                parent.rightChild = minLeftChild;
+            }
+            minLeftChild.parent = parent;
+        } else { //4.左右子树都没有
+            if (parent == null) {
+                root = null;
+            } else if (parent.leftChild == node) {
+                parent.leftChild = null;
+            } else if (parent.rightChild == node) {
+                parent.rightChild = null;
+            }
+        }
+
+        node.parent = null;
+        node.leftChild = null;
+        node.rightChild = null;
+        return node;
+    }
+
 
     public Node<E> search(E e) {
         if (root == null) {
@@ -83,6 +152,9 @@ public class MySearchBinaryTree<E extends Comparable<E>> {
         System.out.println(tree.search(2));
         System.out.println(tree.search(3));
         System.out.println(tree.search(7));
+
+        tree.remove(2);
+        tree.midTraverse();
     }
 
     private static class Node<E> {
