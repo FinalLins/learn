@@ -206,6 +206,20 @@ public class MyBinaryTree<E> {
         while (!out.isEmpty()) System.out.print("->" + out.pop().item);
     }
 
+    public void depthTraverse() {
+        if (root == null) {
+            return;
+        }
+        Queue<Node<E>> queue = new ArrayDeque<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            Node<E> node = queue.poll();
+            System.out.print("->" + node.item);
+            if (node.leftChild != null) queue.offer(node.leftChild);
+            if (node.rightChild != null) queue.offer(node.rightChild);
+        }
+    }
+
 
     public static void test() {
 
@@ -219,9 +233,11 @@ public class MyBinaryTree<E> {
         Node<Integer> node1 = new Node<>(1, node2, node3);
 
         MyBinaryTree<Integer> binaryTree = new MyBinaryTree<>(node1);
-//        binaryTree.pot();
-//        binaryTree.mot();
+        binaryTree.pot();
+        binaryTree.mot();
         binaryTree.postOT();
+        System.out.println("深度遍历-------");
+        binaryTree.depthTraverse();
 
         //算法思路 ： 怎么把递归改成非递归方式？？？？？
 
