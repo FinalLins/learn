@@ -1,5 +1,6 @@
 package com.lin.learn.structure;
 
+import com.lin.learn.java.structure.tree.MyAVLTree;
 import com.lin.learn.java.structure.tree.MyBinaryTree;
 import com.lin.learn.java.structure.tree.MyHuffmanTree;
 import com.lin.learn.java.structure.tree.MySearchBinaryTree;
@@ -24,5 +25,10 @@ public class Tree {
     @Test
     public void testHuffmanTree() {
         MyHuffmanTree.test();
+    }
+
+    @Test
+    public void testAvlTree() {
+        MyAVLTree.test();
     }
 }
