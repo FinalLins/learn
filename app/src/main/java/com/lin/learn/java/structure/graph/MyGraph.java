@@ -1,5 +1,7 @@
 package com.lin.learn.java.structure.graph;
 
+import java.util.Stack;
+
 /**
  * 自定义图，这里使用邻接矩阵实现
  * 顶点：一维数组
@@ -9,6 +11,8 @@ public class MyGraph {
     private int[] vertices;         //顶点
     private int verticesSize;       //顶点数量
     private int[][] matrix;         //边
+
+    private boolean[] visited;
 
     /**
      * 表示路径不可达或者没有边
@@ -20,6 +24,7 @@ public class MyGraph {
         this.verticesSize = size;
         this.vertices = new int[size];
         this.matrix = new int[size][size];
+        this.visited = new boolean[size];
 
         for (int i = 0; i < size; i++) {
             this.vertices[i] = i;
@@ -80,17 +85,35 @@ public class MyGraph {
         return degree;
     }
 
-    public int getFirstNeightBor(int v) {
-        return getNeightbor(v, 0);
-    }
-
     /**
      * 返回顶点的第一个有效邻接点
      *
      * @param v
      * @return
      */
-    public int getNeightbor(int v, int index) {
+    public int getFirstNeightBor(int v) {
+        return getNeightBor(v, 0);
+    }
+
+    public int getNextNeighBor(int v, int index) {
+        if (v < 0 || v >= verticesSize) {
+            return INDEX_INACCESSIBLE;
+        }
+
+        for (int i = index + 1; i < verticesSize; i++) {
+            int w = matrix[v][i];
+            if (w != 0 && w != WEIGHT_INACCESSIBLE) {
+                return i;
+            }
+        }
+        return INDEX_INACCESSIBLE;
+    }
+
+    /**
+     * @param v
+     * @return
+     */
+    public int getNeightBor(int v, int index) {
         if (v < 0 || v >= verticesSize) {
             return INDEX_INACCESSIBLE;
         }
@@ -102,6 +125,62 @@ public class MyGraph {
             }
         }
         return INDEX_INACCESSIBLE;
+    }
+
+    private void clearVisited() {
+        for (int i = 0; i < verticesSize; i++) {
+            visited[i] = false;
+        }
+    }
+
+    /**
+     * 深度优先遍历Depth First Search
+     */
+    public void dfs() {
+        clearVisited();
+        for (int i = 0; i < verticesSize; i++) {
+            int index = i % verticesSize;
+            if (visited[index]) continue;
+            dfsOne(index);
+        }
+        System.out.println();
+    }
+
+    private void dfsOne(int i) {
+        visited[i] = true;
+        System.out.print("->" + i);
+        Stack<DFS> stack = new Stack<>();
+        stack.push(new DFS(i, getFirstNeightBor(i)));
+        while (!stack.isEmpty()) {
+            DFS dfs = stack.peek();
+            int v = dfs.v;
+            int index = dfs.index;
+            if (index == INDEX_INACCESSIBLE) {
+                stack.clear();
+                break;
+            }
+
+            if (!visited[index]) {
+                visited[index] = true;
+                System.out.print("->" + index);
+                dfs.index = getNextNeighBor(v, index);
+                v = index;
+                index = getFirstNeightBor(index);
+                stack.push(new DFS(v, index));
+            } else {
+                stack.pop();
+            }
+        }
+    }
+
+    private static class DFS {
+        int v;
+        int index;
+
+        public DFS(int v, int index) {
+            this.v = v;
+            this.index = index;
+        }
     }
 
     public static void test() {
@@ -118,7 +197,20 @@ public class MyGraph {
         System.out.println(graph.getInDegree(2));
         System.out.println(graph.getOutDegree(2));
         System.out.println(graph.getFirstNeightBor(2));
-        System.out.println(graph.getNeightbor(2, 1));
+        System.out.println(graph.getNeightBor(2, 1));
+//        graph.dfs();
+
+        int[][] matrix2 = {
+                {0, 1, 1, WEIGHT_INACCESSIBLE, WEIGHT_INACCESSIBLE},
+                {WEIGHT_INACCESSIBLE, 0, WEIGHT_INACCESSIBLE, 1, WEIGHT_INACCESSIBLE},
+                {WEIGHT_INACCESSIBLE, WEIGHT_INACCESSIBLE, 0, WEIGHT_INACCESSIBLE, WEIGHT_INACCESSIBLE},
+                {1, WEIGHT_INACCESSIBLE, WEIGHT_INACCESSIBLE, 0, WEIGHT_INACCESSIBLE},
+                {WEIGHT_INACCESSIBLE, WEIGHT_INACCESSIBLE, 1, WEIGHT_INACCESSIBLE, 0},
+        };
+
+        MyGraph graph2 = new MyGraph(matrix2.length);
+        graph2.matrix = matrix2;
+        graph2.dfs();
 
     }
 }
