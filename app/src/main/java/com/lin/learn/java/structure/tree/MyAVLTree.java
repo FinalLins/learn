@@ -75,10 +75,11 @@ public class MyAVLTree<E extends Comparable<E>> {
 
             minNode.leftChild = leftChild;
             if (minNode == rightChild) { //右孩子没有左子树(node.rightChild.leftChild == null)
-                fixedNode = minNode;
+                minNode.balance++;
             } else {
                 //如果右孩子有左子树，那么就要从右孩子左子树最小节点minNode的parent开始向上调整
                 fixedNode = minNode.parent;
+                minNode.balance = node.balance;
                 minNode.rightChild = rightChild;
             }
             pointerParent(node, minNode);
