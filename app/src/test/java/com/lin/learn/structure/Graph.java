@@ -1,6 +1,7 @@
 package com.lin.learn.structure;
 
 import com.lin.learn.java.structure.graph.MyGraph;
+import com.lin.learn.java.structure.graph.MyGraphDijikstra;
 import com.lin.learn.java.structure.graph.MyGraphKruskal;
 import com.lin.learn.java.structure.graph.MyGraphPrim;
 
@@ -20,5 +21,10 @@ public class Graph {
     @Test
     public void testKruskal(){
         MyGraphKruskal.test();
+    }
+
+    @Test
+    public void testDijikstra(){
+        MyGraphDijikstra.test();
     }
 }

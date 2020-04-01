@@ -1,25 +1,38 @@
 package com.lin.learn;
 
 
-import org.junit.Test;
+import com.lin.learn.java.algorithm.DynamicProgramming;
+import com.lin.learn.java.algorithm.GameMap;
+import com.lin.learn.java.algorithm.GameMap_AStarPathFinding;
+import com.lin.learn.java.algorithm.Mahjong;
+import com.lin.learn.java.algorithm.SaiChengBiao;
 
-import java.util.Deque;
-import java.util.Queue;
+import org.junit.Test;
 
 public class AlgorithmTest {
 
     @Test
     public void saichengbiao() {
-        com.lin.learn.java.algorithm.c1.Practice.test();
+        SaiChengBiao.test();
     }
 
     @Test
     public void mahjongSort() {
-        com.lin.learn.java.algorithm.c2.Practice.test();
+        Mahjong.test();
     }
 
     @Test
-    public void heapSort() {
-        com.lin.learn.java.algorithm.c3.Practice.test();
+    public void mapPathFindingTest(){
+        GameMap.test();
+    }
+
+    @Test
+    public void mapAStartPathFindingTest(){
+        GameMap_AStarPathFinding.test();
+    }
+
+    @Test
+    public void dynamicProgrammingLCS_Test(){
+        DynamicProgramming.LCS("ABCBDAB","BDCABA");
     }
 }

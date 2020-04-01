@@ -32,6 +32,9 @@ public class MyGraphKruskal {
         this.size = m.length;
         this.vertices = new int[size];
         this.matrix = m;
+        for (int i = 0; i < size; i++) {
+            this.vertices[i] = i;
+        }
     }
 
     /**

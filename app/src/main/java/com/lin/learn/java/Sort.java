@@ -203,6 +203,65 @@ public class Sort {
 
     }
 
+
+    /**
+     * 堆排序
+     *
+     * @param array
+     */
+    public static void heapSort(int[] array) {
+        int len = array.length;
+
+        System.out.println(Arrays.toString(array));
+        //1.构建最小堆
+        buildMinHeap(array, len);
+        System.out.println(Arrays.toString(array));
+        //2.
+        for (int i = len - 1; i >= 0; i--) {
+            swap(array, i, 0);
+            adjustHeap(array, 0, i);
+        }
+
+        System.out.println(Arrays.toString(array));
+    }
+
+    /**
+     * 构建最小堆
+     */
+    private static void buildMinHeap(int[] array, int len) {
+        //找到最后一个非叶子节点
+        int last = (len - 1) / 2;
+        for (int i = last; i >= 0; i--) {
+            adjustHeap(array, i, len);
+        }
+    }
+
+    private static void adjustHeap(int[] array, int index, int len) {
+        int minIndex = -1;
+
+        while (index < len) {
+            int leftChild = 2 * index + 1;
+            int rightChild = 2 * index + 2;
+            minIndex = index;
+            if (leftChild < len && array[leftChild] < array[minIndex]) {
+                minIndex = leftChild;
+            }
+
+            if (rightChild < len && array[rightChild] < array[minIndex]) {
+                minIndex = rightChild;
+            }
+
+            if (minIndex == index) {
+                break;
+            }
+
+            swap(array, minIndex, index);
+            index = minIndex;
+        }
+
+
+    }
+
     public static void test() {
         int[] array = {30, 7, 15, 6, 8, 0, 19, 3, 9, 4, 11, 21, 22, 24};
         int len = array.length;
@@ -219,6 +278,9 @@ public class Sort {
         mergeSort(mergeArray, 0, len - 1);
         printArray(mergeArray);
 
+        int[] heapArray = Arrays.copyOf(array, len);
+        heapSort(heapArray);
+        printArray(heapArray);
 
     }
 }
