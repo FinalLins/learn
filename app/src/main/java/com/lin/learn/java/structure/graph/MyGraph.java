@@ -1,5 +1,10 @@
 package com.lin.learn.java.structure.graph;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -133,15 +138,38 @@ public class MyGraph {
         }
     }
 
+    public void dfs() {
+        clearVisited();
+        for (int i = 1; i < verticesSize + 1; i++) {
+            int index = i % verticesSize;
+            if (visited[index]) continue;
+//            System.out.println("index : " + index);
+            dfsOne(index);
+        }
+        System.out.println();
+    }
+
     /**
      * 深度优先遍历Depth First Search
      */
-    public void dfs() {
+    public void dfs2() {
         clearVisited();
-        for (int i = 0; i < verticesSize; i++) {
+        for (int i = 1; i < verticesSize + 1; i++) {
             int index = i % verticesSize;
             if (visited[index]) continue;
-            dfsOne(index);
+//            System.out.println("index : " + index);
+            dfsOne2(index);
+        }
+        System.out.println();
+    }
+
+    public void dfs3() {
+        clearVisited();
+        for (int i = 1; i < verticesSize + 1; i++) {
+            int index = i % verticesSize;
+            if (visited[index]) continue;
+//            System.out.println("index : " + index);
+            dfsOne3(index);
         }
         System.out.println();
     }
@@ -173,6 +201,68 @@ public class MyGraph {
         }
     }
 
+    private void dfsOne2(int i) {
+        visited[i] = true;
+        System.out.print("->" + i);
+        Stack<Integer> stack = new Stack<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(i, getFirstNeightBor(i));
+        stack.push(i);
+        while (!stack.isEmpty()) {
+
+            int v = stack.peek();
+            Integer index = map.get(v);
+            if (index == null || index == INDEX_INACCESSIBLE) {
+                stack.clear();
+                break;
+            }
+
+            if (!visited[index]) {
+                visited[index] = true;
+                System.out.print("->" + index);
+                map.put(v, getNextNeighBor(v, index));
+                v = index;
+                index = getFirstNeightBor(index);
+                map.put(v, index);
+                stack.push(v);
+            } else {
+                stack.pop();
+            }
+        }
+    }
+
+    public void dfsOne3(int i) {
+        visited[i] = true;
+        System.out.print("->" + i);
+        Stack<Integer> stack = new Stack<>();
+        stack.push(i);
+        while (!stack.isEmpty()) {
+            int v = getEffective(stack.peek());
+            if (v == -1) {
+                stack.pop();
+            } else {
+                visited[v] = true;
+                System.out.print("->" + v);
+                stack.push(v);
+            }
+        }
+
+    }
+
+    private int getEffective(int v) {
+        if (v < 0 || v >= verticesSize) {
+            return INDEX_INACCESSIBLE;
+        }
+
+        for (int i = 0; i < verticesSize; i++) {
+            int w = matrix[v][i];
+            if (w > 0 && !visited[i]) {
+                return i;
+            }
+        }
+        return INDEX_INACCESSIBLE;
+    }
+
     private static class DFS {
         int v;
         int index;
@@ -198,7 +288,7 @@ public class MyGraph {
         System.out.println(graph.getOutDegree(2));
         System.out.println(graph.getFirstNeightBor(2));
         System.out.println(graph.getNeightBor(2, 1));
-//        graph.dfs();
+        graph.dfs();
 
         int[][] matrix2 = {
                 {0, 1, 1, WEIGHT_INACCESSIBLE, WEIGHT_INACCESSIBLE},
@@ -211,6 +301,9 @@ public class MyGraph {
         MyGraph graph2 = new MyGraph(matrix2.length);
         graph2.matrix = matrix2;
         graph2.dfs();
+        graph2.dfs2();
+        graph2.dfs3();
 
     }
+
 }
