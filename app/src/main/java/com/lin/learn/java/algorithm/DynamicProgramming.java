@@ -71,7 +71,7 @@ public class DynamicProgramming {
         System.out.println("相似度 : " + t);
     }
 
-    private static void display(int[][] arrays) {
+    public static void display(int[][] arrays) {
         int len1 = arrays.length;
         for (int i = 0; i < len1; i++) {
             int len2 = arrays[i].length;
@@ -80,6 +80,7 @@ public class DynamicProgramming {
             }
             System.out.println();
         }
+        System.out.println("-------------------");
     }
 
     /**
@@ -141,5 +142,58 @@ public class DynamicProgramming {
             next[i] = j;
         }
         return next;
+    }
+
+
+    /**
+     * 弗洛伊德算法，计算两个点之间的最短距离（时间复杂度O(n) = n ^ 3）
+     */
+    public static void floyd(int[][] graph) {
+        int size = graph.length;
+
+        int[][] path = getFloydPath(size);
+
+        for (int k = 0; k < size; k++) { //锁死k行和k列
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    if (graph[i][j] > graph[i][k] + graph[k][j]) {
+                        graph[i][j] = graph[i][k] + graph[k][j];
+                        //记录路径变化
+                        path[i][j] = path[i][k];
+                    }
+                }
+            }
+        }
+        System.out.println("使用弗洛伊德算法后的路径长度 : ");
+        display(graph);
+        display(path);
+        displayFloydPath(path, graph);
+
+    }
+
+    private static void displayFloydPath(int[][] path, int[][] graph) {
+        int size = path.length;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                System.out.print("V" + i + "->V" + j);
+                System.out.print(" (V" + i);
+                int k = path[i][j];
+                while (j != k) {
+                    System.out.print("->V" + k);
+                    k = path[k][j];
+                }
+                System.out.println("->V" + j + ") = " + graph[i][j]);
+            }
+        }
+    }
+
+    private static int[][] getFloydPath(int size) {
+        int[][] path = new int[size][size];
+        for (int i = 0; i < path.length; i++) {
+            for (int j = 0; j < size; j++) {
+                path[i][j] = j;
+            }
+        }
+        return path;
     }
 }

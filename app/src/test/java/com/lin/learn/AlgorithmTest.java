@@ -44,6 +44,18 @@ public class AlgorithmTest {
 
     @Test
     public void dynamicProgrammingKMP_Test() {
-        DynamicProgramming.KMP("abckeifababcabxfjjfekababcabafdsa","ababcaba");
+        DynamicProgramming.KMP("abckeifababcabxfjjfekababcabafdsa", "ababcaba");
+    }
+
+    @Test
+    public void dynamicProgrammingFloyd_Test() {
+        int inf = Integer.MAX_VALUE;
+        int[][] g = {
+                {0, 2, 1, 5},
+                {2, 0, 4, inf},
+                {1, 4, 0, 3},
+                {5, inf, 3, 0},
+        };
+        DynamicProgramming.floyd(g);
     }
 }
