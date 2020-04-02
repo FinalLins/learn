@@ -175,14 +175,14 @@ public class DynamicProgramming {
         int size = path.length;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                System.out.print("V" + i + "->V" + j);
+                System.out.print("V" + i + "->V" + j + " = " + graph[i][j]);
                 System.out.print(" (V" + i);
                 int k = path[i][j];
                 while (j != k) {
                     System.out.print("->V" + k);
                     k = path[k][j];
                 }
-                System.out.println("->V" + j + ") = " + graph[i][j]);
+                System.out.println("->V" + j + ")");
             }
         }
     }
