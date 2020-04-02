@@ -65,6 +65,10 @@ public class DynamicProgramming {
         }
         //5.打印结果
         while (!stack.isEmpty()) System.out.print(" " + stack.pop());
+
+        System.out.println();
+        float t = (float) graph[len1 - 1][len2 - 1] / Math.max(len1, len2);
+        System.out.println("相似度 : " + t);
     }
 
     private static void display(int[][] arrays) {
@@ -76,5 +80,66 @@ public class DynamicProgramming {
             }
             System.out.println();
         }
+    }
+
+    /**
+     * 精准匹配
+     *
+     * @param src  目标串
+     * @param dest 模式串
+     */
+    public static void KMP(String src, String dest) {
+        int[] next = KMP_NEXT(dest);
+        int sLen = src.length();
+        int dLen = dest.length();
+        boolean match = false;
+        int i = 0, j = 0;
+        for (; i < sLen; i++) {
+            char ci = src.charAt(i);
+            char cj = dest.charAt(j);
+
+            while (j > 0 && ci != cj) j = next[j - 1];
+
+            if (ci == cj) j++;
+
+            if (j == dLen) {
+                match = true;
+                break;
+            }
+        }
+        if (match) {
+            System.out.println("精准匹配 src : " + (i - j + 1));
+        } else {
+            System.out.println("未匹配");
+        }
+    }
+
+    /**
+     * next数组主要是找到头尾最长公共子序列的长度(一定是从尾部开始)【最大前缀后缀公共元素长度】
+     * ababcaba
+     * a            0
+     * ab           0
+     * aba          1(头:a 尾:a 长度1相同)
+     * abab         2(头:ab 尾:ab 长度2)
+     * ababc        0
+     * ababca       1
+     * ababcab      2
+     * ababcaba     3
+     *
+     * @param dest
+     * @return
+     */
+    private static int[] KMP_NEXT(String dest) {
+        int len = dest.length();
+        int[] next = new int[len];
+        for (int i = 1, j = 0; i < len; i++) {
+            char ci = dest.charAt(i);
+            char cj = dest.charAt(j);
+
+            while (j > 0 && ci != cj) j = next[j - 1];
+            if (ci == cj) j++;
+            next[i] = j;
+        }
+        return next;
     }
 }

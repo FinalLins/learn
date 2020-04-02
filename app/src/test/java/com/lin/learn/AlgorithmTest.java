@@ -41,4 +41,9 @@ public class AlgorithmTest {
     public void dynamicProgrammingLCS_Test() {
         DynamicProgramming.LCS("ABCBDAB", "BDCABA");
     }
+
+    @Test
+    public void dynamicProgrammingKMP_Test() {
+        DynamicProgramming.KMP("abckeifababcabxfjjfekababcabafdsa","ababcaba");
+    }
 }
