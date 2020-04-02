@@ -8,7 +8,7 @@ import java.util.Arrays;
  * 1.每个选手必须与其他的 n-1 个选手比赛一次
  * 2.每个选手每天只能比赛一次
  */
-public class SaiChengBiao {
+public class 赛程表 {
 
     public static void test() {
         int[][] arr = table(3);

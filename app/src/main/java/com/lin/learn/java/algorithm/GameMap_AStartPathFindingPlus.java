@@ -35,7 +35,7 @@ public class GameMap_AStartPathFindingPlus {
         Node end = new Node(14, 12);
         MapInfo mapInfo = new MapInfo(map, 23, 15, start, end);
         new GameMap_AStartPathFindingPlus().start(mapInfo);
-        DynamicProgramming.display(map);
+        动态规划.display(map);
     }
 
     /**

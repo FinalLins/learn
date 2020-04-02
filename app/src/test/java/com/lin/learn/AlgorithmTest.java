@@ -1,13 +1,13 @@
 package com.lin.learn;
 
 
-import com.lin.learn.java.algorithm.DynamicProgramming;
+import com.lin.learn.java.algorithm.动态规划;
 import com.lin.learn.java.algorithm.GameMap;
 import com.lin.learn.java.algorithm.GameMap_AStarPathFinding;
 import com.lin.learn.java.algorithm.GameMap_AStartPathFindingPlus;
-import com.lin.learn.java.algorithm.Mahjong;
+import com.lin.learn.java.algorithm.麻将排序;
 import com.lin.learn.java.algorithm.Pi;
-import com.lin.learn.java.algorithm.SaiChengBiao;
+import com.lin.learn.java.algorithm.赛程表;
 import com.lin.learn.java.algorithm.九宫图;
 import com.lin.learn.java.algorithm.八皇后;
 import com.lin.learn.java.algorithm.数独;
@@ -18,12 +18,12 @@ public class AlgorithmTest {
 
     @Test
     public void saichengbiao() {
-        SaiChengBiao.test();
+        赛程表.test();
     }
 
     @Test
     public void mahjongSort() {
-        Mahjong.test();
+        麻将排序.test();
     }
 
     @Test
@@ -48,12 +48,12 @@ public class AlgorithmTest {
 
     @Test
     public void dynamicProgrammingLCS_Test() {
-        DynamicProgramming.LCS("ABCBDAB", "BDCABA");
+        动态规划.LCS("ABCBDAB", "BDCABA");
     }
 
     @Test
     public void dynamicProgrammingKMP_Test() {
-        DynamicProgramming.KMP("abckeifababcabxfjjfekababcabafdsa", "ababcaba");
+        动态规划.KMP("abckeifababcabxfjjfekababcabafdsa", "ababcaba");
     }
 
     @Test
@@ -65,7 +65,7 @@ public class AlgorithmTest {
                 {1, 4, 0, 3},
                 {5, inf, 3, 0},
         };
-        DynamicProgramming.floyd(g);
+        动态规划.floyd(g);
     }
 
     @Test

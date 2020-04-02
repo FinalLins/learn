@@ -3,9 +3,9 @@ package com.lin.learn.java.algorithm;
 import java.util.Stack;
 
 /**
- * 动态规划
+ * 动态规划（DynamicProgramming）
  */
-public class DynamicProgramming {
+public class 动态规划 {
 
     /**
      * 最长公共子序列算法Longest Common Subsequence
