@@ -62,8 +62,8 @@ public class GameMap {
 
         int startX = 1;
         int startY = 1;
-        int endX = 12;
-        int endY = 11;
+        int endX = 11;
+        int endY = 10;
         dfs(startY, startX, endY, endX);
         display();
     }

@@ -115,7 +115,7 @@ public class GameMap_AStarPathFinding {
 
         //找到离终点最短的点
         int minDistance = Integer.MAX_VALUE;
-        int minIndex = 0;
+        int minIndex = -1;
         int size = collect.size();
         //如果size = 0;说明是死路，但是在网游设计中肯定不会有死路。
         for (int i = 0; i < size; i++) {
@@ -125,7 +125,9 @@ public class GameMap_AStarPathFinding {
                 minIndex = i;
             }
         }
-        System.out.println(p.y + "---" + p.x);
+        if (minIndex == -1) {
+            throw new RuntimeException(p.y + "---" + p.x + "->死路了");
+        }
         return collect.get(minIndex);
     }
 
