@@ -14,6 +14,10 @@ import sun.misc.ProxyGenerator;
 public class ProxyMode {
     public interface Interface {
         void doSomething(String args);
+
+        int get();
+
+        void set(int val);
     }
 
     public interface Interface2 {
@@ -21,10 +25,21 @@ public class ProxyMode {
     }
 
     public static class A implements Interface {
+        private int val = 0;
+
+        @Override
+        public void set(int val) {
+            this.val = val;
+        }
 
         @Override
         public void doSomething(String args) {
             System.out.println("A : " + args);
+        }
+
+        @Override
+        public int get() {
+            return val;
         }
     }
 
@@ -49,6 +64,16 @@ public class ProxyMode {
         @Override
         public void doSomething(String args) {
             this.anInterface.doSomething(args);
+        }
+
+        @Override
+        public int get() {
+            return 0;
+        }
+
+        @Override
+        public void set(int val) {
+
         }
     }
 
@@ -123,7 +148,7 @@ public class ProxyMode {
         System.out.println("proxy clazz : " + clazz.getName());
         //2.
         final Constructor<?> cons = clazz.getConstructor(InvocationHandler.class);
-        Interface a = new A();
+        A a = new A();
         System.out.println(a.getClass().getName() + "==" + a + "==" + a.hashCode());
         final InvocationHandler h = new DynamicProxy(a);
         Interface i = (Interface) cons.newInstance(h);
@@ -131,6 +156,9 @@ public class ProxyMode {
         i.doSomething("动态代理3");
         System.out.println(i == a);
         System.out.println(i.equals(a));
+        System.out.println(i.get() + "===" + a.get());
+        a.set(10);
+        System.out.println(i.get() + "===" + a.get());
     }
 
     private static void saveGeneratedFiles(Class<?> clazz) throws Throwable {
